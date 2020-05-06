@@ -165,7 +165,7 @@ public class MyThread3 {
      * @see CountDownLatch
      * @param list
      * @throws InterruptedException если целевой ресурс выдает это исключение.
-     * @version 1.0
+     * @version 1.1
      */
     private  synchronized void setNumber(List<Integer> list) throws InterruptedException {
 
@@ -185,14 +185,11 @@ public class MyThread3 {
                     maxValue = Integer.parseInt(a.getValue());
                 }
             }
-            count = 0;
-            if (minValue > maxValue) {
-                int tempV = minValue;
-                int tempK = minIndex;
+        if (minValue > maxValue) {
+            int tempK = minIndex;
                 minValue = maxValue;
                 minIndex = maxIndex;
                 maxIndex = tempK;
-                maxValue = tempV;
             }
 
             int temp = list.get(maxIndex);
