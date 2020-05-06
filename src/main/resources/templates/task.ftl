@@ -142,7 +142,7 @@
         </div>
 <form action="/list_tasks/task/1" method="post" >
     <div class="form-group">
-        <label for="formGroupExampleInput">Напишите что хотите!</label>
+        <label for="formGroupExampleInput">Напишите, что хотите!</label>
         <input type="text" class="form-control text-center" id="formGroupExampleInput" placeholder="Введите текст" name="text" required>
         <small id="text2" class="form-text text-muted">Время многопоточности 👍🏻</small>
     </div>
