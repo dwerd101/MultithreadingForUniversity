@@ -15,9 +15,10 @@
 <#include "header.ftl">
 <div class="jumbotron text-center">
     <div class="container">
-        <h1 class="display-3">😢 Ошибка! Что-то пошло не так </h1>
+        <h1 class="display-3">404😢 Что-то пошло не так! </h1>
         <p><a class="btn btn-primary btn-lg" href="/list_tasks" role="button">Вернуться назад</a></p>
     </div>
 </div>
+<#include "footer.ftl">
 </body>
 </html>

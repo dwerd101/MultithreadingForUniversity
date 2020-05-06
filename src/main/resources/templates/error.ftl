@@ -19,5 +19,6 @@
         <p><a class="btn btn-primary btn-lg" href="/list_tasks" role="button">Вернуться назад</a></p>
     </div>
 </div>
+<#include "footer.ftl">
 </body>
 </html>
