@@ -9,14 +9,23 @@ import java.util.logging.Logger;
 
 /**
  *  3.Создать распараллеливающийся алгоритм сортировки одномерного массива.
+ *  Используется сортировка выбором.
+ *  @autor Болобан Роман
  */
 public class MyThread3 {
 
-
+    /**Текст полученый из запроса*/
     String text;
+
+    /**Список чисел*/
     List<Integer> list;
+
+    /**Список имен потоков */
     List<String> listThread;
+
+    /** Карта максимальных и минимальных значении */
     Map<Integer, String> map;
+
     static CountDownLatch countDownLatch;
 
     public List<Integer> getList() {
@@ -43,13 +52,17 @@ public class MyThread3 {
     }
 
 
-
+    /**
+     * Сортирует список при помощи потоков.
+     * @return {@link MyThread3#list}.
+     * @version 1.0
+     */
     @SneakyThrows
     public List<Integer> sort() {
-        Calculate1 calculate1 = new Calculate1(list,this);
-        Calculate2 calculate2 = new Calculate2(list,this);
-        calculate1.start();
-        calculate2.start();
+        FirstPartSort firstPartSort = new FirstPartSort(list,this);
+        SecondPartSort secondPartSort = new SecondPartSort(list,this);
+        firstPartSort.start();
+        secondPartSort.start();
         countDownLatch.await();
         listThread.add("Отсортировал все \uD83D\uDE0A");
         return list;
@@ -60,13 +73,13 @@ public class MyThread3 {
     }
 
 
-    static class Calculate1 extends Thread {
+    static class FirstPartSort extends Thread {
 
-        List<Integer> integers;
+        List<Integer> list;
         MyThread3 myThread3;
 
-        public Calculate1(List<Integer> integers, MyThread3 myThread3) {
-            this.integers = integers;
+        public FirstPartSort(List<Integer> list, MyThread3 myThread3) {
+            this.list = list;
             this.myThread3 = myThread3;
 
         }
@@ -76,7 +89,7 @@ public class MyThread3 {
         public void run() {
             while (!isInterrupted()) {
                 Thread.sleep(100);
-                myThread3.getMinNumber(integers);
+                myThread3.getNumber(list);
 
             }
 
@@ -84,13 +97,13 @@ public class MyThread3 {
         }
     }
 
-    static class Calculate2 extends Thread {
+    static class SecondPartSort extends Thread {
 
-        List<Integer> integers;
+        List<Integer> list;
         MyThread3 myThread3;
 
-        public Calculate2(List<Integer> integers, MyThread3 myThread3) {
-            this.integers = integers;
+        public SecondPartSort(List<Integer> list, MyThread3 myThread3) {
+            this.list = list;
             this.myThread3 = myThread3;
 
         }
@@ -100,17 +113,25 @@ public class MyThread3 {
         public void run() {
             while (!isInterrupted()) {
                 Thread.sleep(100);
-                myThread3.setNumber(integers);
+                myThread3.setNumber(list);
 
             }
         }
     }
 
-
-    private  synchronized void getMinNumber(List<Integer> list) throws InterruptedException {
+    /**
+     * Ищет минимальные, максимальмальные значения и кладет в {@link MyThread3#map}.
+     * Затем нить останавливается и ждет ответа от метода {@link MyThread3#setNumber(List<Integer> list)}.
+     * Если ответа нет, то в течение одной секунды нить продолжит работу.
+     * Когда список будет пустым, нить вызовет interrupt().
+     * @param list
+     * @throws InterruptedException если целевой ресурс выдает это исключение.
+     * @version 1.0
+     */
+    private  synchronized void getNumber(List<Integer> list) throws InterruptedException {
 
         for (int i = 0; i < list.size(); i++) {
-            listThread.add("Имя потока: "+Thread.currentThread().getName()+". Выполняю метод: getMinNumber()");
+            listThread.add("Имя потока: "+Thread.currentThread().getName()+". Выполняю метод: getNumber()");
             int minValue = list.get(i);
             int minIndex = i;
             for (int j = i; j < list.size(); j++) {
@@ -133,6 +154,19 @@ public class MyThread3 {
         }
         Thread.currentThread().interrupt();
     }
+
+    /**
+     * Меняет максимальные и минимальные значения местами в {@link MyThread3#list}.
+     * Если размер {@link MyThread3#list} равняется нулю, вызывает  {@link MyThread3#countDownLatch}, декрементирует его
+     * и прерывается нить вызовом interrupt().
+     * Иначе меняем местами значения в {@link MyThread3#list}.
+     * Затем нить останавливается и ждет ответа от метода {@link MyThread3#getNumber(List<Integer> list)}.
+     * Если ответа нет, то в течение одной секунды нить продолжит работу.
+     * @see CountDownLatch
+     * @param list
+     * @throws InterruptedException если целевой ресурс выдает это исключение.
+     * @version 1.0
+     */
     private  synchronized void setNumber(List<Integer> list) throws InterruptedException {
 
         int count = 1;
@@ -141,12 +175,6 @@ public class MyThread3 {
         int minValue = 0;
         int maxValue = 0;
         listThread.add("Имя потока: "+Thread.currentThread().getName()+". Выполняю метод: setNumber()");
-        if(map.size()==1) {
-            notify();
-
-            Thread.currentThread().interrupt();
-        }
-        else {
             for (Map.Entry<Integer, String> a : map.entrySet()) {
                 if (count < 2) {
                     minIndex = a.getKey();
@@ -182,5 +210,3 @@ public class MyThread3 {
             }
         }
     }
-
-}

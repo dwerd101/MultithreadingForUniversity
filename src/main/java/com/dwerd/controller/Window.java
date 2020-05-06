@@ -3,7 +3,6 @@ package com.dwerd.controller;
 import com.dwerd.tasks.task1.MyThread;
 import com.dwerd.tasks.task2.MyThread2;
 import com.dwerd.tasks.task3.MyThread3;
-import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,27 +38,27 @@ public class Window {
                     map.addAttribute("lists",null);
                 }
                else map.addAttribute("lists", list);
-            return "Task";
+            return "task";
             case 2:
                 MyThread2 myThread2 = new MyThread2();
                 List<String> list1 = myThread2.getList();
                 map.addAttribute("list1",list1);
-                return "Task";
+                return "task";
             case 3:
                 MyThread3 myThread3 = new MyThread3(request);
                 if(request.getParameter("text")==null) {
                     map.addAttribute("listIsEmpty", this);
-                    return "Task";
+                    return "task";
                 }
                 else if(myThread3.getList().isEmpty()) {
                     map.addAttribute("notNumbers", this);
-                    return "Task";
+                    return "task";
                 }
                 List<Integer> list2 = myThread3.sort();
                 List<String> list3 = myThread3.getListThread();
                 map.addAttribute("list2", list2);
                 map.addAttribute("list3", list3);
-                return "Task";
+                return "task";
 
 
         }
