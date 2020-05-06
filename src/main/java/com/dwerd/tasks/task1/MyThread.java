@@ -1,4 +1,4 @@
-package com.dwerd.tasks.easy.task1;
+package com.dwerd.tasks.task1;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,9 +11,10 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.logging.Logger;
 
-@Component
+/**
+ * 1.Основной поток создает дочерний. Родительский и дочерний потоки должны распечатать по десять строк текста.
+ */
 @Data
-@AllArgsConstructor
 public class MyThread {
 
     List<String> mainThreadList;

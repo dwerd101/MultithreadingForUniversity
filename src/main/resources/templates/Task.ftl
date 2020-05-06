@@ -76,7 +76,7 @@
         </tr>
     </table>
 
-    <form action="/list_tasks" method="post">
+    <form action="/list_tasks/task/3" method="post">
         <div class="form-group text-center">
             <button type="submit" class="btn btn-primary ">Назад</button>
         </div>

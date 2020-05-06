@@ -1,4 +1,4 @@
-package com.dwerd.tasks.easy.task3;
+package com.dwerd.tasks.task3;
 
 import lombok.SneakyThrows;
 
@@ -7,7 +7,10 @@ import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 
-public class MyThreadWeb3 {
+/**
+ *  3.Создать распараллеливающийся алгоритм сортировки одномерного массива.
+ */
+public class MyThread3 {
 
 
     String text;
@@ -20,7 +23,7 @@ public class MyThreadWeb3 {
         return list;
     }
 
-    public MyThreadWeb3(HttpServletRequest request) {
+    public MyThread3(HttpServletRequest request) {
         listThread = new LinkedList<>();
         list = new ArrayList<>();
         map = new HashMap<>();
@@ -56,22 +59,15 @@ public class MyThreadWeb3 {
         return listThread;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-
-        List<Integer> list = Arrays.asList(24, 24, 8, 21, 29 ,13, 25, 29 ,17 ,3 ,1,4, 1,7, 17, 24 ,2 ,12 ,14 ,28 ,25 ,2 ,4 ,39 ,28, 15 ,29 ,28 ,11 ,6 ,16 ,18);
-
-
-
-    }
 
     static class Calculate1 extends Thread {
 
         List<Integer> integers;
-        MyThreadWeb3 myThreadWeb3;
+        MyThread3 myThread3;
 
-        public Calculate1(List<Integer> integers, MyThreadWeb3 myThreadWeb3) {
+        public Calculate1(List<Integer> integers, MyThread3 myThread3) {
             this.integers = integers;
-            this.myThreadWeb3 = myThreadWeb3;
+            this.myThread3 = myThread3;
 
         }
 
@@ -80,7 +76,7 @@ public class MyThreadWeb3 {
         public void run() {
             while (!isInterrupted()) {
                 Thread.sleep(100);
-                myThreadWeb3.getMinNumber(integers);
+                myThread3.getMinNumber(integers);
 
             }
 
@@ -91,11 +87,11 @@ public class MyThreadWeb3 {
     static class Calculate2 extends Thread {
 
         List<Integer> integers;
-        MyThreadWeb3 myThreadWeb3;
+        MyThread3 myThread3;
 
-        public Calculate2(List<Integer> integers, MyThreadWeb3 myThreadWeb3) {
+        public Calculate2(List<Integer> integers, MyThread3 myThread3) {
             this.integers = integers;
-            this.myThreadWeb3 = myThreadWeb3;
+            this.myThread3 = myThread3;
 
         }
 
@@ -104,7 +100,7 @@ public class MyThreadWeb3 {
         public void run() {
             while (!isInterrupted()) {
                 Thread.sleep(100);
-                myThreadWeb3.setNumber(integers);
+                myThread3.setNumber(integers);
 
             }
         }
@@ -114,7 +110,7 @@ public class MyThreadWeb3 {
     private  synchronized void getMinNumber(List<Integer> list) throws InterruptedException {
 
         for (int i = 0; i < list.size(); i++) {
-            listThread.add("Имя потока: "+Thread.currentThread().getName()+" выполняю метод: getMinNumber()");
+            listThread.add("Имя потока: "+Thread.currentThread().getName()+". Выполняю метод: getMinNumber()");
             int minValue = list.get(i);
             int minIndex = i;
             for (int j = i; j < list.size(); j++) {
@@ -135,7 +131,6 @@ public class MyThreadWeb3 {
             notify();
             wait(1000);
         }
-        //countDownLatch.countDown();
         Thread.currentThread().interrupt();
     }
     private  synchronized void setNumber(List<Integer> list) throws InterruptedException {
@@ -145,7 +140,7 @@ public class MyThreadWeb3 {
         int maxIndex = 0;
         int minValue = 0;
         int maxValue = 0;
-        listThread.add("Имя потока: "+Thread.currentThread().getName()+" выполняю метод: setNumber()");
+        listThread.add("Имя потока: "+Thread.currentThread().getName()+". Выполняю метод: setNumber()");
         if(map.size()==1) {
             notify();
 

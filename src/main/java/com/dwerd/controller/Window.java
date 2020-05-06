@@ -1,8 +1,9 @@
 package com.dwerd.controller;
 
-import com.dwerd.tasks.easy.task1.MyThread;
-import com.dwerd.tasks.easy.task2.MyThread2;
-import com.dwerd.tasks.easy.task3.MyThreadWeb3;
+import com.dwerd.tasks.task1.MyThread;
+import com.dwerd.tasks.task2.MyThread2;
+import com.dwerd.tasks.task3.MyThread3;
+import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,17 +46,17 @@ public class Window {
                 map.addAttribute("list1",list1);
                 return "Task";
             case 3:
-                MyThreadWeb3 myThreadWeb3 = new MyThreadWeb3(request);
+                MyThread3 myThread3 = new MyThread3(request);
                 if(request.getParameter("text")==null) {
                     map.addAttribute("listIsEmpty", this);
                     return "Task";
                 }
-                else if(myThreadWeb3.getList().isEmpty()) {
+                else if(myThread3.getList().isEmpty()) {
                     map.addAttribute("notNumbers", this);
                     return "Task";
                 }
-                List<Integer> list2 = myThreadWeb3.sort();
-                List<String> list3 = myThreadWeb3.getListThread();
+                List<Integer> list2 = myThread3.sort();
+                List<String> list3 = myThread3.getListThread();
                 map.addAttribute("list2", list2);
                 map.addAttribute("list3", list3);
                 return "Task";

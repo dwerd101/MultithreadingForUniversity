@@ -1,17 +1,17 @@
-package com.dwerd.tasks.easy.task2;
+package com.dwerd.tasks.task2;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
 import lombok.SneakyThrows;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 
-@Component
+/**
+ *  5.Основной поток создает дочерний. Родительский и дочерний потоки должны распечатать по десять строк текста.
+ *  При этом вывод должен быть синхронизирован таким образом,
+ *  чтобы родительский и дочерний потоки выводили строки строго по очереди.
+ */
 public class MyThread2 {
 
     public List<String> getList() {
