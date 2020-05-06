@@ -23,7 +23,7 @@
     <div class="jumbotron text-center">
         <div class="container">
             <h2 class="display-3">😢 Я не умею буквы сортировать...</h2>
-            <p><a class="btn btn-primary btn-lg" href="/list_tasks/task/3" role="button">Вернуться назад</a></p>
+            <p><a class="btn btn-primary btn-lg" href="/list_tasks/3" role="button">Вернуться назад</a></p>
         </div>
     </div>
 <#else>
@@ -39,7 +39,7 @@
                 <div class="col">
                 </div>
             </div>
-            <form action="/list_tasks/task/3" method="post" >
+            <form action="/list_tasks/3" method="post" >
                 <div class="form-group">
                     <label for="formGroupExampleInput">Напишите,пожалуйста,числа!</label>
                     <input type="text" class="form-control text-center" id="formGroupExampleInput" placeholder="Введите через пробелы: '12 13', либо запятыми: '12,13', либо все и сразу: '12 ,13' или '12, 13' или '12 , 13'" name="text" required>
@@ -76,7 +76,7 @@
         </tr>
     </table>
 
-    <form action="/list_tasks/task/3" method="post">
+    <form action="/list_tasks/3" method="post">
         <div class="form-group text-center">
             <button type="submit" class="btn btn-primary ">Назад</button>
         </div>
@@ -123,7 +123,7 @@
         </tbody>
     </table>
 
-    <form action="/list_tasks/task/1" method="post">
+    <form action="/list_tasks/1" method="post">
     <div class="form-group text-center">
         <button type="submit" class="btn btn-primary ">Назад</button>
     </div>
@@ -140,7 +140,7 @@
             <div class="col">
             </div>
         </div>
-<form action="/list_tasks/task/1" method="post" >
+<form action="/list_tasks/1" method="post" >
     <div class="form-group">
         <label for="formGroupExampleInput">Напишите, что хотите!</label>
         <input type="text" class="form-control text-center" id="formGroupExampleInput" placeholder="Введите текст" name="text" required>

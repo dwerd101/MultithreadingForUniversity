@@ -28,7 +28,7 @@ public class Window {
         return "listTasks";
     }
 
-    @RequestMapping(value = "/list_tasks/task/{id}", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/list_tasks/{id}", method = {RequestMethod.GET, RequestMethod.POST})
     private String listEasyTask1(@PathVariable("id") int id, ModelMap map, HttpServletRequest request) {
         switch (id) {
             case 1:
